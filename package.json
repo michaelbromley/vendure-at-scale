@@ -1,0 +1,33 @@
+{
+  "name": "demo-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "ts-node ./src/index.ts",
+    "dev:worker": "ts-node ./src/index-worker.ts",
+    "dev": "concurrently npm:dev:*",
+    "build": "tsc",
+    "start:server": "node ./dist/index.js",
+    "start:worker": "node ./dist/index-worker.js",
+    "start": "concurrently npm:start:*",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@vendure/admin-ui-plugin": "3.0.6",
+    "@vendure/asset-server-plugin": "3.0.6",
+    "@vendure/core": "3.0.6",
+    "@vendure/email-plugin": "3.0.6",
+    "dotenv": "16.4.5",
+    "pg": "8.13.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.3",
+    "@graphql-codegen/client-preset": "4.5.1",
+    "@graphql-codegen/typescript": "4.1.2",
+    "@types/react": "18.3.12",
+    "@vendure/cli": "3.0.6",
+    "@vendure/ui-devkit": "3.0.6",
+    "concurrently": "9.1.0",
+    "typescript": "5.3.3"
+  }
+}
