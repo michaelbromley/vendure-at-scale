@@ -10,10 +10,13 @@ import {myApolloServerPlugin} from "./api/apollo-server-plugin";
 import {MyNestMiddleware} from "./api/nestjs-middleware";
 import {BlogPostShopResolver} from "./api/blog-post-shop.resolver";
 import {BlogPostEntityResolver} from "./api/blog-post-entity.resolver";
+import { Author } from './entities/author.entity';
+import { AuthorService } from './services/author.service';
+import { AuthorAdminResolver } from './api/author-admin.resolver';
 
 @VendurePlugin({
     imports: [PluginCommonModule],
-    providers: [{ provide: PERFORMANCE_PLUGIN_OPTIONS, useFactory: () => PerformancePlugin.options }, BlogPostService],
+    providers: [{ provide: PERFORMANCE_PLUGIN_OPTIONS, useFactory: () => PerformancePlugin.options }, BlogPostService, AuthorService],
     configuration: config => {
         config.apiOptions.apolloServerPlugins.push(myApolloServerPlugin());
         config.apiOptions.middleware.push({
@@ -23,10 +26,10 @@ import {BlogPostEntityResolver} from "./api/blog-post-entity.resolver";
         return config;
     },
     compatibility: '^3.0.0',
-    entities: [BlogPost],
+    entities: [BlogPost, Author],
     adminApiExtensions: {
         schema: adminApiExtensions,
-        resolvers: [BlogPostAdminResolver]
+        resolvers: [BlogPostAdminResolver, AuthorAdminResolver]
     },
     shopApiExtensions: {
         schema: shopApiExtensions,

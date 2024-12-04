@@ -306,8 +306,54 @@ export type AuthenticationMethod = Node & {
 
 export type AuthenticationResult = CurrentUser | InvalidCredentialsError;
 
+export type Author = Node & {
+  __typename?: 'Author';
+  avatar?: Maybe<Asset>;
+  createdAt: Scalars['DateTime']['output'];
+  customFields?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type AuthorFilterParameter = {
+  _and?: InputMaybe<Array<AuthorFilterParameter>>;
+  _or?: InputMaybe<Array<AuthorFilterParameter>>;
+  createdAt?: InputMaybe<DateOperators>;
+  id?: InputMaybe<IdOperators>;
+  name?: InputMaybe<StringOperators>;
+  updatedAt?: InputMaybe<DateOperators>;
+};
+
+export type AuthorList = PaginatedList & {
+  __typename?: 'AuthorList';
+  items: Array<Author>;
+  totalItems: Scalars['Int']['output'];
+};
+
+export type AuthorListOptions = {
+  /** Allows the results to be filtered */
+  filter?: InputMaybe<AuthorFilterParameter>;
+  /** Specifies whether multiple top-level "filter" fields should be combined with a logical AND or OR operation. Defaults to AND. */
+  filterOperator?: InputMaybe<LogicalOperator>;
+  /** Skips the first n results, for use in pagination */
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  /** Specifies which properties to sort the results by */
+  sort?: InputMaybe<AuthorSortParameter>;
+  /** Takes n results, for use in pagination */
+  take?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AuthorSortParameter = {
+  createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
+};
+
 export type BlogPost = Node & {
   __typename?: 'BlogPost';
+  author: Author;
   content: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   customFields?: Maybe<Scalars['JSON']['output']>;
@@ -795,7 +841,14 @@ export type CreateAssetInput = {
 
 export type CreateAssetResult = Asset | MimeTypeError;
 
+export type CreateAuthorInput = {
+  avatarId?: InputMaybe<Scalars['ID']['input']>;
+  customFields?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
 export type CreateBlogPostInput = {
+  authorId: Scalars['ID']['input'];
   content: Scalars['String']['input'];
   customFields?: InputMaybe<Scalars['JSON']['input']>;
   slug: Scalars['String']['input'];
@@ -1389,6 +1442,7 @@ export type CustomFields = {
   Address: Array<CustomFieldConfig>;
   Administrator: Array<CustomFieldConfig>;
   Asset: Array<CustomFieldConfig>;
+  Author: Array<CustomFieldConfig>;
   BlogPost: Array<CustomFieldConfig>;
   Channel: Array<CustomFieldConfig>;
   Collection: Array<CustomFieldConfig>;
@@ -2845,6 +2899,7 @@ export type Mutation = {
   createAdministrator: Administrator;
   /** Create a new Asset */
   createAssets: Array<CreateAssetResult>;
+  createAuthor: Author;
   createBlogPost: BlogPost;
   /** Create a new Channel */
   createChannel: CreateChannelResult;
@@ -2901,6 +2956,7 @@ export type Mutation = {
   deleteAsset: DeletionResponse;
   /** Delete multiple Assets */
   deleteAssets: DeletionResponse;
+  deleteAuthor: DeletionResponse;
   deleteBlogPost: DeletionResponse;
   /** Delete a Channel */
   deleteChannel: DeletionResponse;
@@ -3061,6 +3117,7 @@ export type Mutation = {
   updateAdministrator: Administrator;
   /** Update an existing Asset */
   updateAsset: Asset;
+  updateAuthor: Author;
   updateBlogPost: BlogPost;
   /** Update an existing Channel */
   updateChannel: UpdateChannelResult;
@@ -3253,6 +3310,11 @@ export type MutationCreateAssetsArgs = {
 };
 
 
+export type MutationCreateAuthorArgs = {
+  input: CreateAuthorInput;
+};
+
+
 export type MutationCreateBlogPostArgs = {
   input: CreateBlogPostInput;
 };
@@ -3397,6 +3459,11 @@ export type MutationDeleteAssetArgs = {
 
 export type MutationDeleteAssetsArgs = {
   input: DeleteAssetsInput;
+};
+
+
+export type MutationDeleteAuthorArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -3815,6 +3882,11 @@ export type MutationUpdateAdministratorArgs = {
 
 export type MutationUpdateAssetArgs = {
   input: UpdateAssetInput;
+};
+
+
+export type MutationUpdateAuthorArgs = {
+  input: UpdateAuthorInput;
 };
 
 
@@ -5167,6 +5239,8 @@ export type Query = {
   asset?: Maybe<Asset>;
   /** Get a list of Assets */
   assets: AssetList;
+  author?: Maybe<Author>;
+  authors: AuthorList;
   blogPost?: Maybe<BlogPost>;
   blogPosts: BlogPostList;
   channel?: Maybe<Channel>;
@@ -5266,6 +5340,16 @@ export type QueryAssetArgs = {
 
 export type QueryAssetsArgs = {
   options?: InputMaybe<AssetListOptions>;
+};
+
+
+export type QueryAuthorArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryAuthorsArgs = {
+  options?: InputMaybe<AuthorListOptions>;
 };
 
 
@@ -6541,7 +6625,15 @@ export type UpdateAssetInput = {
   tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type UpdateAuthorInput = {
+  avatarId?: InputMaybe<Scalars['ID']['input']>;
+  customFields?: InputMaybe<Scalars['JSON']['input']>;
+  id: Scalars['ID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateBlogPostInput = {
+  authorId?: InputMaybe<Scalars['ID']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
   customFields?: InputMaybe<Scalars['JSON']['input']>;
   id: Scalars['ID']['input'];

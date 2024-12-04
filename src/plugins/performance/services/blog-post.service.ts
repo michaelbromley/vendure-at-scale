@@ -16,6 +16,7 @@ import {loggerCtx, PERFORMANCE_PLUGIN_OPTIONS} from '../constants';
 import {BlogPost} from '../entities/blog-post.entity';
 import {PluginInitOptions} from '../types';
 import {CreateBlogPostInput, UpdateBlogPostInput} from "../gql/generated";
+import {Author} from "../entities/author.entity";
 
 @Injectable()
 export class BlogPostService {
@@ -61,6 +62,10 @@ export class BlogPostService {
     async create(ctx: RequestContext, input: CreateBlogPostInput): Promise<BlogPost> {
         const newEntity = await this.connection.getRepository(ctx, BlogPost).save(input);
         await this.customFieldRelationService.updateRelations(ctx, BlogPost, input, newEntity);
+        if (input.authorId) {
+            newEntity.author = await this.connection.getEntityOrThrow(ctx, Author, input.authorId);
+            await this.connection.getRepository(ctx, BlogPost).save(newEntity);
+        }
         return assertFound(this.findOne(ctx, newEntity.id));
     }
 
@@ -69,6 +74,10 @@ export class BlogPostService {
         const updatedEntity = patchEntity(entity, input);
         await this.connection.getRepository(ctx, BlogPost).save(updatedEntity, { reload: false });
         await this.customFieldRelationService.updateRelations(ctx, BlogPost, input, updatedEntity);
+        if (input.authorId) {
+            updatedEntity.author = await this.connection.getEntityOrThrow(ctx, Author, input.authorId);
+            await this.connection.getRepository(ctx, BlogPost).save(updatedEntity);
+        }
         return assertFound(this.findOne(ctx, updatedEntity.id));
     }
 

@@ -109,8 +109,19 @@ export type AuthenticationMethod = Node & {
 
 export type AuthenticationResult = CurrentUser | InvalidCredentialsError | NotVerifiedError;
 
+export type Author = Node & {
+  __typename?: 'Author';
+  avatar?: Maybe<Asset>;
+  createdAt: Scalars['DateTime']['output'];
+  customFields?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
 export type BlogPost = Node & {
   __typename?: 'BlogPost';
+  author: Author;
   content: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   customFields?: Maybe<Scalars['JSON']['output']>;

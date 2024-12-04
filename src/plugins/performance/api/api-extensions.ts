@@ -1,6 +1,14 @@
 import gql from 'graphql-tag';
 
 const commonApiExtensions = gql`
+    type Author implements Node {
+        id: ID!
+        createdAt: DateTime!
+        updatedAt: DateTime!
+        name: String!
+        avatar: Asset
+    }
+
     type BlogPost implements Node {
         id: ID!
         createdAt: DateTime!
@@ -8,6 +16,7 @@ const commonApiExtensions = gql`
         slug: String!
         title: String!
         content: String!
+        author: Author!
     }
 
     type BlogPostList implements PaginatedList {
@@ -31,6 +40,7 @@ const blogPostAdminApiExtensions = gql`
         slug: String!
         title: String!
         content: String!
+        authorId: ID!
     }
 
     input UpdateBlogPostInput {
@@ -38,6 +48,7 @@ const blogPostAdminApiExtensions = gql`
         slug: String
         title: String
         content: String
+        authorId: ID
     }
 
     extend type Mutation {
@@ -46,8 +57,42 @@ const blogPostAdminApiExtensions = gql`
         deleteBlogPost(id: ID!): DeletionResponse!
     }
 `;
+const authorAdminApiExtensions = gql`
+
+
+    type AuthorList implements PaginatedList {
+        items: [Author!]!
+        totalItems: Int!
+    }
+
+    # Generated at run-time by Vendure
+    input AuthorListOptions
+
+    extend type Query {
+        author(id: ID!): Author
+        authors(options: AuthorListOptions): AuthorList!
+    }
+
+    input CreateAuthorInput {
+        name: String!
+        avatarId: ID
+    }
+
+    input UpdateAuthorInput {
+        id: ID!
+        name: String
+        avatarId: ID
+    }
+
+    extend type Mutation {
+        createAuthor(input: CreateAuthorInput!): Author!
+        updateAuthor(input: UpdateAuthorInput!): Author!
+        deleteAuthor(id: ID!): DeletionResponse!
+    }
+`;
 export const adminApiExtensions = gql`
     ${blogPostAdminApiExtensions}
+    ${authorAdminApiExtensions}
 `;
 export const shopApiExtensions = gql`
     ${commonApiExtensions}
