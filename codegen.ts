@@ -14,18 +14,19 @@ const config: CodegenConfig = {
             schema: 'http://localhost:3000/admin-api',
             plugins: ['typescript']
         },
-        // './src/plugins/loyalty-points/ui/gql/': {
-        //     preset: 'client',
-        //     documents: './src/plugins/loyalty-points/ui/**/*.ts',
-        //     presetConfig: {
-        //         fragmentMasking: false,
-        //     },
-        // },
         './src/plugins/referral/gql/generated.ts': {
             schema: 'http://localhost:3000/admin-api',
             plugins: ['typescript']
         },
         './src/plugins/referral/gql/generated-shop.ts': {
+            schema: 'http://localhost:3000/shop-api',
+            plugins: ['typescript'],
+        },
+        './src/plugins/performance/gql/generated.ts': {
+            schema: 'http://localhost:3000/admin-api',
+            plugins: ['typescript'],
+        },
+        './src/plugins/performance/gql/generated-shop.ts': {
             schema: 'http://localhost:3000/shop-api',
             plugins: ['typescript'],
         },

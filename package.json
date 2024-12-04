@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "populate": "ts-node ./populate.ts",
     "dev:server": "ts-node ./src/index.ts",
     "dev:worker": "ts-node ./src/index-worker.ts",
     "dev": "concurrently npm:dev:*",
@@ -26,6 +27,8 @@
     "@graphql-codegen/typescript": "4.1.2",
     "@types/react": "18.3.12",
     "@vendure/cli": "3.0.6",
+    "@vendure/create": "^3.0.8",
+    "@vendure/testing": "^3.0.8",
     "@vendure/ui-devkit": "3.0.6",
     "concurrently": "9.1.0",
     "typescript": "5.3.3"

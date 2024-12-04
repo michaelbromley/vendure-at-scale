@@ -9,6 +9,7 @@ import {adminApiExtensions, shopApiExtensions} from './api/api-extensions';
 import {myApolloServerPlugin} from "./api/apollo-server-plugin";
 import {MyNestMiddleware} from "./api/nestjs-middleware";
 import {BlogPostShopResolver} from "./api/blog-post-shop.resolver";
+import {BlogPostEntityResolver} from "./api/blog-post-entity.resolver";
 
 @VendurePlugin({
     imports: [PluginCommonModule],
@@ -16,7 +17,7 @@ import {BlogPostShopResolver} from "./api/blog-post-shop.resolver";
     configuration: config => {
         config.apiOptions.apolloServerPlugins.push(myApolloServerPlugin());
         config.apiOptions.middleware.push({
-            route: 'admin-api',
+            route: '*',
             handler: MyNestMiddleware,
         })
         return config;
@@ -29,7 +30,7 @@ import {BlogPostShopResolver} from "./api/blog-post-shop.resolver";
     },
     shopApiExtensions: {
         schema: shopApiExtensions,
-        resolvers: [BlogPostShopResolver]
+        resolvers: [BlogPostShopResolver, BlogPostEntityResolver]
     }
 })
 export class PerformancePlugin {

@@ -1,23 +1,25 @@
-import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import {
-    dummyPaymentHandler,
     DefaultJobQueuePlugin,
+    DefaultLogger,
     DefaultSearchPlugin,
+    dummyPaymentHandler,
+    LogLevel,
     VendureConfig,
 } from '@vendure/core';
-import { defaultEmailHandlers, EmailPlugin, FileBasedTemplateLoader } from '@vendure/email-plugin';
-import { AssetServerPlugin } from '@vendure/asset-server-plugin';
-import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
+import {defaultEmailHandlers, EmailPlugin, FileBasedTemplateLoader} from '@vendure/email-plugin';
+import {AssetServerPlugin} from '@vendure/asset-server-plugin';
+import {AdminUiPlugin} from '@vendure/admin-ui-plugin';
 import 'dotenv/config';
 import path from 'path';
-import { LoyaltyPointsPlugin } from './plugins/loyalty-points/loyalty-points.plugin';
-import { ReferralPlugin } from './plugins/referral/referral.plugin';
-import { PerformancePlugin } from './plugins/performance/performance.plugin';
+import {LoyaltyPointsPlugin} from './plugins/loyalty-points/loyalty-points.plugin';
+import {ReferralPlugin} from './plugins/referral/referral.plugin';
+import {PerformancePlugin} from './plugins/performance/performance.plugin';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
 const serverPort = +process.env.PORT || 3000;
 
 export const config: VendureConfig = {
+    logger: new DefaultLogger({ level: LogLevel.Debug }),
     apiOptions: {
         port: serverPort,
         adminApiPath: 'admin-api',

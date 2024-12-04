@@ -6,9 +6,10 @@ import {adminApiExtensions, shopApiExtensions} from "./api/api-extensions";
 import {ReferralService} from "./service/referral.service";
 import {ReferralCodeService} from "./service/referral-code.service";
 import {ReferralRewardService} from "./service/referral-reward.service";
+import {LoyaltyPointsPlugin} from "../loyalty-points";
 
 @VendurePlugin({
-    imports: [PluginCommonModule],
+    imports: [PluginCommonModule, LoyaltyPointsPlugin],
     providers: [{
         provide: REFERRAL_PLUGIN_OPTIONS,
         useFactory: () => ReferralPlugin.options

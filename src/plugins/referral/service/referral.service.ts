@@ -12,7 +12,6 @@ import {
     TransactionalConnection,
 } from '@vendure/core';
 
-import '../custom-field-types';
 import { Referral } from '../entities/referral.entity';
 import { ReferralListOptions, ReferralState, UpdateReferralInput } from '../gql/generated';
 import { SetReferralResult, ShopReferral } from '../gql/generated-shop';

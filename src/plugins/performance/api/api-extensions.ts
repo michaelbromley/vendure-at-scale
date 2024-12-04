@@ -5,7 +5,9 @@ const commonApiExtensions = gql`
         id: ID!
         createdAt: DateTime!
         updatedAt: DateTime!
-        code: String!
+        slug: String!
+        title: String!
+        content: String!
     }
 
     type BlogPostList implements PaginatedList {
@@ -26,12 +28,16 @@ const blogPostAdminApiExtensions = gql`
     ${commonApiExtensions}
 
     input CreateBlogPostInput {
-        code: String!
+        slug: String!
+        title: String!
+        content: String!
     }
 
     input UpdateBlogPostInput {
         id: ID!
-        code: String
+        slug: String
+        title: String
+        content: String
     }
 
     extend type Mutation {

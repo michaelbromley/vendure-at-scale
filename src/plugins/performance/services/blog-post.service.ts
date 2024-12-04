@@ -1,32 +1,21 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { DeletionResponse, DeletionResult } from '@vendure/common/lib/generated-types';
-import { CustomFieldsObject, ID, PaginatedList } from '@vendure/common/lib/shared-types';
+import {Inject, Injectable} from '@nestjs/common';
+import {DeletionResponse, DeletionResult} from '@vendure/common/lib/generated-types';
+import {ID, PaginatedList} from '@vendure/common/lib/shared-types';
 import {
+    assertFound,
     CustomFieldRelationService,
     ListQueryBuilder,
     ListQueryOptions,
+    Logger,
+    patchEntity,
     RelationPaths,
     RequestContext,
-    TransactionalConnection,
-    assertFound,
-    patchEntity, Logger
+    TransactionalConnection
 } from '@vendure/core';
 import {loggerCtx, PERFORMANCE_PLUGIN_OPTIONS} from '../constants';
-import { BlogPost } from '../entities/blog-post.entity';
-import { PluginInitOptions } from '../types';
-
-// These can be replaced by generated types if you set up code generation
-interface CreateBlogPostInput {
-    code: string;
-    // Define the input fields here
-    customFields?: CustomFieldsObject;
-}
-interface UpdateBlogPostInput {
-    id: ID;
-    code?: string;
-    // Define the input fields here
-    customFields?: CustomFieldsObject;
-}
+import {BlogPost} from '../entities/blog-post.entity';
+import {PluginInitOptions} from '../types';
+import {CreateBlogPostInput, UpdateBlogPostInput} from "../gql/generated";
 
 @Injectable()
 export class BlogPostService {

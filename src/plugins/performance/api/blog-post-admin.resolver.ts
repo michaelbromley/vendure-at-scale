@@ -17,19 +17,7 @@ import {
 import { BlogPostService } from '../services/blog-post.service';
 import { BlogPost } from '../entities/blog-post.entity';
 import {loggerCtx} from "../constants";
-
-// These can be replaced by generated types if you set up code generation
-interface CreateBlogPostInput {
-    code: string;
-    // Define the input fields here
-    customFields?: CustomFieldsObject;
-}
-interface UpdateBlogPostInput {
-    id: ID;
-    code?: string;
-    // Define the input fields here
-    customFields?: CustomFieldsObject;
-}
+import {CreateBlogPostInput, UpdateBlogPostInput} from "../gql/generated";
 
 @Resolver()
 export class BlogPostAdminResolver {
