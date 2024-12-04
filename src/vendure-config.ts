@@ -12,6 +12,7 @@ import 'dotenv/config';
 import path from 'path';
 import { LoyaltyPointsPlugin } from './plugins/loyalty-points/loyalty-points.plugin';
 import { ReferralPlugin } from './plugins/referral/referral.plugin';
+import { PerformancePlugin } from './plugins/performance/performance.plugin';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
 const serverPort = +process.env.PORT || 3000;
@@ -107,5 +108,6 @@ export const config: VendureConfig = {
         }),
         LoyaltyPointsPlugin.init({}),
         ReferralPlugin.init({}),
+        PerformancePlugin.init({}),
     ],
 };
