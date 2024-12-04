@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@nestjs/common';
 import {DeletionResponse, DeletionResult} from '@vendure/common/lib/generated-types';
 import {ID, PaginatedList} from '@vendure/common/lib/shared-types';
 import {
-    assertFound,
+    assertFound, Channel,
     CustomFieldRelationService,
     ListQueryBuilder,
     ListQueryOptions,
@@ -85,5 +85,21 @@ export class BlogPostService {
                 message: e.toString(),
             };
         }
+    }
+
+    async getContent(ctx: RequestContext, id: ID): Promise<string> {
+        const post = await this.connection.getEntityOrThrow(ctx, BlogPost, id);
+
+        // Imagine we need to get all channel data in order to
+        // select the correct content
+        const channels = await this.connection.getRepository(ctx, Channel).find().then(
+            async (channels) => {
+                // let's slow things down just to make the point
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                return channels;
+            }
+        );
+
+        return post.content
     }
 }
