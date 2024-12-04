@@ -3,7 +3,28 @@
 This repository contains a demo Vendure project for use in the
 "Vendure at Scale" workshop.
 
+## Setup
 
+1. Clone this repo `git clone git@github.com:michaelbromley/vendure-at-scale.git`
+2. Install dependencies `npm i`
+3. Run the postgres_db service `docker compose up postgres_db -d`
+4. Populate the database with some test data `npm run populate`
+
+## GraphQL Queries
+
+Here are some of the queries we will be using in the workshop:
+
+```graphql
+query GetBlogPosts {
+  blogPosts {
+    items {
+      id
+      title
+      content
+    }
+  }
+}
+```
 
 ---
 
