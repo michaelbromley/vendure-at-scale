@@ -5,13 +5,13 @@ import {loggerCtx} from "../constants";
 export function myApolloServerPlugin (): ApolloServerPlugin {
     return {
         async requestDidStart({ contextValue }) {
-            Logger.debug('MIDDLEWARE: myApolloServerPlugin.requestDidStart', loggerCtx);
+            Logger.verbose('MIDDLEWARE: myApolloServerPlugin.requestDidStart', loggerCtx);
             return {
                 async executionDidStart() {
-                    Logger.debug('MIDDLEWARE: myApolloServerPlugin.executionDidStart', loggerCtx);
+                    Logger.verbose('MIDDLEWARE: myApolloServerPlugin.executionDidStart', loggerCtx);
                 },
                 async willSendResponse() {
-                    Logger.debug('MIDDLEWARE: myApolloServerPlugin.willSendResponse', loggerCtx);
+                    Logger.verbose('MIDDLEWARE: myApolloServerPlugin.willSendResponse', loggerCtx);
                 }
             }
         },

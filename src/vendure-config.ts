@@ -19,7 +19,7 @@ const IS_DEV = process.env.APP_ENV === 'dev';
 const serverPort = +process.env.PORT || 3000;
 
 export const config: VendureConfig = {
-    logger: new DefaultLogger({ level: LogLevel.Debug }),
+    logger: new DefaultLogger({ level: LogLevel.Verbose }),
     apiOptions: {
         port: serverPort,
         adminApiPath: 'admin-api',

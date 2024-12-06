@@ -11,13 +11,13 @@ export class BlogPostEntityResolver {
 
     @ResolveField()
     title(@Ctx() ctx: RequestContext, @Parent() post: BlogPost) {
-        Logger.debug(`RESOLVER: BlogPost.title`, loggerCtx);
+        Logger.verbose(`RESOLVER: BlogPost.title`, loggerCtx);
         return post.title;
     }
 
     @ResolveField()
     content(@Ctx() ctx: RequestContext, @Parent() post: BlogPost) {
-        Logger.debug(`RESOLVER: BlogPost.content`, loggerCtx);
+        Logger.verbose(`RESOLVER: BlogPost.content`, loggerCtx);
         return this.blogPostService.getContent(ctx, post.id);
     }
 }

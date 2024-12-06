@@ -31,7 +31,7 @@ export class BlogPostService {
         options?: ListQueryOptions<BlogPost>,
         relations?: RelationPaths<BlogPost>,
     ): Promise<PaginatedList<BlogPost>> {
-        Logger.debug('SERVICE: findAll', loggerCtx);
+        Logger.verbose('SERVICE: findAll', loggerCtx);
         return this.listQueryBuilder
             .build(BlogPost, options, {
                 relations,

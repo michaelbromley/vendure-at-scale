@@ -7,7 +7,7 @@ import {loggerCtx} from "../constants";
 export class MyNestMiddleware implements NestMiddleware {
 
     use(req: Request, res: Response, next: NextFunction) {
-        Logger.debug(`MIDDLEWARE: MyNestMiddleware.use`, loggerCtx);
+        Logger.verbose(`MIDDLEWARE: MyNestMiddleware.use`, loggerCtx);
         next();
     }
 }

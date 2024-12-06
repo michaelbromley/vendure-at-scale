@@ -33,7 +33,7 @@ export class BlogPostShopResolver {
         @Args() args: { options: ListQueryOptions<BlogPost> },
         @Relations(BlogPost) relations: RelationPaths<BlogPost>,
     ): Promise<PaginatedList<BlogPost>> {
-        Logger.debug('RESOLVER: blogPosts', loggerCtx);
+        Logger.verbose('RESOLVER: blogPosts', loggerCtx);
         return this.blogPostService.findAll(ctx, args.options || undefined, relations);
     }
 }
