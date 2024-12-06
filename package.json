@@ -15,10 +15,10 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@vendure/admin-ui-plugin": "3.0.6",
-    "@vendure/asset-server-plugin": "3.0.6",
-    "@vendure/core": "3.0.6",
-    "@vendure/email-plugin": "3.0.6",
+    "@vendure/admin-ui-plugin": "3.1.0",
+    "@vendure/asset-server-plugin": "3.1.0",
+    "@vendure/core": "3.1.0",
+    "@vendure/email-plugin": "3.1.0",
     "dotenv": "16.4.5",
     "pg": "8.13.1"
   },
@@ -27,10 +27,10 @@
     "@graphql-codegen/client-preset": "4.5.1",
     "@graphql-codegen/typescript": "4.1.2",
     "@types/react": "18.3.12",
-    "@vendure/cli": "3.0.6",
+    "@vendure/cli": "3.1.0",
     "@vendure/create": "^3.0.8",
     "@vendure/testing": "^3.0.8",
-    "@vendure/ui-devkit": "3.0.6",
+    "@vendure/ui-devkit": "3.1.0",
     "concurrently": "9.1.0",
     "typescript": "5.3.3"
   }
